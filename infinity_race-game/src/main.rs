@@ -1,4 +1,5 @@
 use rusty_engine::prelude::*;
+use rand::prelude::*;
 
 struct GameState {
     health_amount: u8,
@@ -23,6 +24,22 @@ fn main() {
         let roadline = game.add_sprite(format!("roadline{}", i), SpritePreset::RacingBarrierWhite);
         roadline.scale = 0.1;
         roadline.translation.x = -600.0 + 150.0 * i as f32;
+    }
+
+    // create obstacles
+    let obstacles_presets = vec![
+        SpritePreset::RacingBarrelBlue,
+        SpritePreset::RacingBarrelRed,
+        SpritePreset::RacingConeStraight,
+        SpritePreset::RacingConeTurn,
+    ];
+
+    for (i, preset) in obstacle_presets.into_iter().enumerate() {
+        let obstacle = game.add_sprite(format!("obstacle{}", i), preset);
+        obstacle.layer = 5.0;
+        obstacle.collision = true;
+        obstacle.translation.x = thread_rng().gen_range(800.0..1600.0);
+        obstacle.translation.y = thread_rng().gen_range(-300.0..300.0);
     }
 
     game.add_logic(game_logic);
