@@ -30,7 +30,10 @@ fn main() {
     let obstacles_presets = vec![
         SpritePreset::RacingBarrelBlue,
         SpritePreset::RacingBarrelRed,
+        SpritePreset::RacingCarRed,
         SpritePreset::RacingConeStraight,
+        SpritePreset::RacingConeStraight,
+        SpritePreset::RollingHoleStart,
     ];
 
     for (i, preset) in obstacles_presets.into_iter().enumerate() {
@@ -42,10 +45,8 @@ fn main() {
     }
 
     // create health bar
-  let health_amount = game.add_text("health_amount", "HEALTH: 100");
+  let health_amount = game.add_text("health_amount", "HEALTH: 0");
   health_amount.translation = Vec2::new(550.0, 320.0);
-
-
 
     game.add_logic(game_logic);
     game.run(GameState {
